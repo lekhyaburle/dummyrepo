@@ -1,0 +1,286 @@
+Format
+ls [–AabCcDdEFfgHikLlmMnopqRrsTtuWx1] [pathname …]
+
+Description
+ls lists files and directories. If the pathname is a file, ls displays information about the file according to the requested options. If it is a directory, ls displays information about the files and subdirectories therein. You can get information about a directory itself using the –d option.
+
+If you do not specify any options, ls displays only the file names. When ls sends output to a pipe or a file, it writes one name per line; when it sends output to the terminal, it uses the –C (multicolumn) format.
+
+Note
+Code sets that are aliases of each other exist which might cause the test to fail, because the file inquiry operator might return an alias of the code set that you are testing.
+Options
+ls displays at least the file name; you can request more information with the following options:
+–A
+Lists all entries including those starting with periods (.); but excluding any . or .. entries.
+–a
+Lists all entries including those starting with a period (.).
+–b
+Displays nonprintable characters as octal bytes with the form \ooo.
+–C
+Puts output into columns, sorted vertically; this is the default output format to the terminal.
+–c
+Uses the time of the last change of the file's attributes for sorting (–t) or displaying (–l).
+–D
+Displays from directories.
+–d
+Does not display the contents of named directories, but information about the directories themselves.
+–E
+Displays extended attributes for regular files:
+a
+Program runs APF-authorized if linked AC=1
+p
+Program is considered program-controlled
+s
+Program is enabled to run in a shared address space
+l
+Program is loaded from the shared library region
+—
+Attribute not set
+See Long output format.
+–F
+Puts a / after each directory name, a * after every executable file, a | after every FIFO file, a @ after every symbolic link, and a = after every socket. It also puts an & character after an external link name.
+–f
+Forces the pathname argument to be a directory; turns off sorting. ls gives the ordered list of file names in a directory file. The directory file is read and the file names are listed in the same order as they are returned. The contents of a directory file are shown.
+–g
+Same as –l except that it does not display owner.
+–g turns on the Long Output Format. See Long output format for details.
+
+–H
+Displays file formats for regular files:
+––––
+Not specified
+bin
+Binary data
+rec
+Record. (File data consists of records with prefixes. The record prefix contains the length of the record that follows. From the shell command perspective, files with this format will be treated as if they were binary files.)
+Or the following text data delimiters:
+nl
+Newline character
+cr
+Carriage return
+lf
+Line feed
+crlf
+Carriage return followed by line feed
+lfcr
+Line feed followed by carriage return
+crnl
+Carriage return followed by new line
+–H turns on the Long Output Format. See Long output format for details.
+
+–i
+Displays file serial (inode) numbers along with file names.
+–k
+Uses 1024 bytes for block size.
+–L
+Follows symbolic links.
+–l
+Displays permissions, links, owner, group, size, time, name. See Long output format for details.
+–M
+Displays the security label of the file, as in this example:
+> ls -M  has_seclabel no_seclabel
+SECLABEL	has_seclabel
+         	no_seclabelcopy to clipboard
+ls –M does not turn on the –l option. ls –M can be used with other options. See Long output format for details.
+–m
+Displays names in a single line, with commas separating names.
+–n
+Displays UID number and GID number.
+–o
+Same as –l except that it does not display group.
+–o turns on the long output format. See Long output format for details.
+
+–p
+Puts / after directory names.
+–q
+Displays nonprintable characters as ?.
+–R
+Lists subdirectories recursively.
+–r
+Sorts in reverse of typical order; you can combine this with other options that sort the list.
+–s
+Displays size in blocks, after the file serial (inode) number, but before other information. The block size is 512 bytes unless the –k option is used.
+–T
+Displays file tag information associated with the file. The format of this output will be similar to the output from chtag –p.
+An example output:
+> ls -T file
+t   IBM-1047     T=on   file1 copy to clipboard
+ls –T does not turn on the –l option. ls –T can be used with other options. See Long output format for details.
+
+–t
+Sorts by time. By default, this option sorts the output by the modification times of files. You can change this with the –c and –u options.
+–u
+Uses the last access time for sorting (–t) or displaying (–l).
+–W
+Enables the audit bits to be displayed. This option turns on the –l option.
+These bits are printed in a 6-character field directly after the field displaying the file permission bits. These 6 characters are really two groups of 3 bits each. The first group of 3 describes the user-requested audit information. The second group of 3 describes the auditor-requested audit information. Each 3 characters displayed are the read, write, and execute (or search) audit options. Each character indicates the audit option as:
+s (Audit successful audit attempts)
+f (Audit failed access attempts)
+a (Audit all accesses)
+– (No audit)
+
+–W turns on the long output format. See Long output format for details.
+
+–x
+Puts output into sorted columns, with output going across the rows.
+–1
+Forces output to be one entry per line.
+
+
+Note
+When you specify options that are mutually exclusive (for example, –c and –u), the option that appears last on the command line is used.
+Long output format
+The output from ls –l summarizes the most important information about the file on a single line. If the specified pathname is a directory, ls displays information about every file in that directory (one file per line). It precedes this list with a status line that indicates the total number of file system blocks occupied by files in the directory (in 512-byte chunks or 1024-bytes if –k option is used). Following is a sample of the output along with an explanation:
+total 11
+drwxr-xr-x       3 ROOT   SYS1    0 Mar 12 19:32 tmp
+drwxrwxrwx       4 ROOT   SYS1    0 Mar 12 19:32 usr
+drwxr-xr-x       2 ROOT   SYS1    0 Mar 12 19:32 bin
+-rwxr--r--       1 ROOT   SYS1  572 Mar 12 19:32 foo
+-rwxr--r--       1 ROOT   SYS1  640 Mar 12 19:33 abc
+If –T is specified, file tag information is displayed first on the line.
+
+The first character identifies the file type:
+
+–
+Regular file
+b
+Block special file (not supported for z/OS UNIX System Services)
+c
+Character special file
+d
+Directory
+e
+External link
+l
+Symbolic link
+p
+FIFO
+s
+Socket file type
+The next 9 characters are in three groups of 3; they describe the permissions on the file. The first group of 3 describes owner permissions; the second describes group permissions; the third describes other (or “world”) permissions. Characters that might appear are:
+r
+Permission to read the file
+w
+Permission to write on the file
+x
+Permission to execute the file
+The following characters appear only in the execute permission (x) position of the output.
+S
+Same as s, except that the execute bit is turned off.
+s
+If in owner permissions section, the set-user-ID bit is on; if in group permissions section, the set-group-ID bit is on.
+T
+Same as t, except that the execute bit is turned off.
+t
+The sticky bit is on.
+The following character appears after the permissions if the file contains extended ACL entries:
++
+For example:
+ls -l file
+-rwxrwxrw-+       WELLIE         SYS 167 Jan 11 09:54 filecopy to clipboard
+Use getfacl to display the extended ACL entries. You can set permissions with either chmod or setfacl.
+
+After the permissions are set, ls displays the following (using the preceding example), in order:
+The number of links to the file.
+The name of the owner of the file or directory.
+The name of the group that owns the file or directory.
+The size of the file, expressed in bytes. For character special files, it displays the major and minor device types.
+For a file, the date and time the file was last changed; for a directory, when it was created. The –c and –u options can change which time value is used. If the date is more than 6 months old or if the date is in the future, the year is shown instead of the time.
+The name of the file or directory.
+Note
+When files owned by user ID 0 (UID=0) are transferred from any UNIX-type system across an NFS connection to another UNIX-type system, the UID changes to –2 (UID = –2). Because –2 is not a valid UID on a z/OS system, ls displays a –2 in place of the user name.
+If ls –E is issued, an additional four characters follow the original 10 characters:
+total 11
+-rwxr-xr-x  -ps-   1 ROOT   SYS1  101 Mar 12 19:32 her
+-rwxrwxrwx  a-s-   1 ROOT   SYS1  654 Mar 12 19:32 test
+-rwxr-xr-x  a--    1 ROOT   SYS1   40 Mar 12 19:32 temp
+-rwxr--r--  ap-l   1 ROOT   SYS1  572 Mar 12 19:32 foo
+-rwxr--r--  --sl   1 ROOT   SYS1  640 Mar 12 19:33 abccopy to clipboard
+If ls –H is issued, an additional four characters follow the original 10 characters:
+total 32
+-rwxr-xr-x   ----   1 ROOT   SYS1     0 Mar 26 08:47 tmp
+drwxr-xr-x          2 ROOT   SYS1  8192 Mar 26 08:50 usr
+-rwxr--r--   cr     1 ROOT   SYS1    40 Mar 26 08:55 abc
+-rwxr-x---   rec    1 ROOT   SYS1    80 Dec 26 09:55 newfmtcopy to clipboard
+If ls –E is used in conjunction with –H, then the four characters will follow the four characters that are normally associated with ls –E:
+ls -EH
+-rwxr-xr-x  ap-l bin   1 ROOT   SYS1   101 Mar 12 19:21 foo copy to clipboard
+If ls –W is issued, an additional 6 characters, in two groups of 3, follow the original 10 characters. The first group of 3 describes the user-requested audit information; the second group describes auditor-requested audit information.
+total 11
+drwxr-xr-x  fff---     3 ROOT   SYS1    0 Mar 12 19:32 tmp
+drwxrwxrwx  fff---     4 ROOT   SYS1    0 Mar 12 19:32 usr
+drwxr-xr-x  fff---     2 ROOT   SYS1    0 Mar 12 19:32 bin
+-rwxr--r--  fff---     1 ROOT   SYS1  572 Mar 12 19:32 foo
+-rwxr--r--  fff---     1 ROOT   SYS1  640 Mar 12 19:33 abccopy to clipboard
+Usage notes for the ls command
+To display information about a directory from a symbolic link to the directory, either add a trailing slash to the symbolic link name, or use the -L option. For example, if the /etc directory was converted into a symbolic link, issuing an ls on /etc without a trailing slash gives you the following information:
+> ls -l /etc
+lrwxrwxrwx   1 BPXROOT  BIN           12 Oct 18 19:46 /etc -> $SYSNAME/etccopy to clipboard
+However, if you add the trailing slash, the following information about /etc is displayed:
+> ls /etc/      copy to clipboard
+Information
+IBM	cmx	ioepdcf	rc	yylex.c
+NetQ	csh.cshrc	ldap	recover	yyparse.c
+Printsrv	csh.login	log	security	zoneinfo
+TextTools	dfs	magic	socks.conf	 
+booksrv	imoisinf	mailx.rc	startup.mk	 
+bpe	init.options	profile	utmpx	  The same information is displayed when the -L option is used:
+ls -L /etccopy to clipboard
+Information
+IBM	cmx	ioepdcf	rc	yylex.c
+NetQ	csh.cshrc	ldap	recover	yyparse.c
+Printsrv	csh.login	log	security	zoneinfo
+TextTools	dfs	magic	socks.conf	 
+booksrv	imoisinf	mailx.rc	startup.mk	 
+bpe	init.options	profile	utmpx	 
+When issuing the ls command against a large directory structure, the following message might be returned:
+FSUM6786  too many directory entries in "dir"copy to clipboard
+To alleviate this problem, set the _CEE_RUNOPTS="HEAP(,,,FREE)" environment variable before invoking the ls command. Language Environment will free all unused storage to avoid exhausting the user heap. For more information about heap tuning, see z/OS Language Environment Programming Reference.
+Environment variables
+ls uses the following environment variables:
+COLUMNS
+Contains the terminal width in columns. ls uses this value to determine the number of output columns to write using the –C option.
+TZ
+Contains the time zone to be used when displaying date and time strings.
+Localization
+ls uses the following localization environment variables:
+LANG
+LC_ALL
+LC_COLLATE
+LC_CTYPE
+LC_MESSAGES
+LC_TIME
+LC_SYNTAX
+NLSPATH
+See Localization for more information.
+
+Exit values
+0
+Successful completion
+1
+Failure due to any of the following:
+Out of memory
+Inability to find a file's information
+Too many directories
+File or directory not found
+Specified on the command line
+2
+Incorrect command-line option
+Messages
+Possible error messages include:
+File or directory name is not found
+The requested file or directory does not exist.
+Cannot allocate memory for sorting
+To sort its output, ls needs to allocate memory; this message says that there was not enough memory for the sorting operation.
+Too many directory entries in dir
+This message appears only when ls runs out of dynamically allocated memory.
+Portability
+POSIX.2, X/Open Portability Guide, UNIX systems.
+
+The –A, –b, –E, –f, –g, –L, –m, –n, –o, –p, –s, –W, and –x options are extensions of the POSIX standard.
+
+Related information
+Format of the TZ environment variable explains how to set the local time zone with the TZ environment variable.
+
+ls-f, sh, tcsh
+

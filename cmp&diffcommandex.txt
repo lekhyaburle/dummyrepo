@@ -1,0 +1,19 @@
+The cmp commandThe cmp (compare) command compares two files, character (byte) by character, and provides the location of the differences to the screen.
+Used with no options, cmp will only provide the location of the first discrepancy in the form of “char, line”. However, there are options that will provide you with more information. The “-l” option will provide you with a list of the byte number and the ASCII octal value of the differing bytes.
+The cmp command is the best command for simply telling you if two files are different, but unless you want to count each character number, it's not a very good tool for finding the differences.
+slide 2 of 4
+The diff CommandThe diff command provides you with the line numbers of one of the files that need to be changed to make the files identical. The output looks like:
+10c10 
+< 1. Create a script or determine which command you want to be executed regularly and determine how often it should be run. 
+--- 
+> 1. Create a script or determine which executed regularly and determine how often it should be run. 
+24,26d23 
+< Any field that is not applicable to your job should have an asterisk (*) as a place holder. If you want to specify more than one value for any field, separate the values with a comma and no whitespace. The days of the week are indicated by a number with Sunday being 0. 
+< For example: 
+
+The diff command uses special symbols to tell you how to change the first file to make it identical to the second file. “10c10” replace line 10 of the old file, which is indicated by the “<” symbol and replace it with line 10 of the second file, which is indicated by the “>” symbol. “24,26d23” says to delete lines 24 through 26 of the old file and the two files will be identical. One other symbol is in the form of 5a6, which says append the line that follows to line 5. 
+
+
+cmp file1.txt file2.txtCompares file1 to file2, reading each file byte-by-byte and comparing them until one of the byte pairs is not equal. When a difference is found, it will output the location in the file where the difference was found, and exit. Example output:
+
+file.txt file2.txt differ: char 1011, line 112

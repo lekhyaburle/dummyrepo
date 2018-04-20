@@ -1,0 +1,130 @@
+10.102.17.61
+SSH:22
+user28
+
+
+
+bash-bourne again shell
+
+
+ksh-kone shell
+csh-c shell
+
+
+ctrl+B-to move backward by one character
+ctrl+F-to move forward by one character
+ESC+B-to move one word backward
+ESC+F-to move one word forward 
+ctrl+A-to move to first character in the line
+ctrl+E-to move to the end of the line
+ctrl+K-to delete from current position to end of the line
+
+
+
+special files c/b--character or block files
+
+crw-rw-rw- 1 root root      1,   5 Feb 17 03:44 zero
+
+
+brw-rw---- 1 root disk      1,   0 Feb 17 03:44 ram0
+
+
+mainly these are for input/output files
+
+
+cat - used for contents of the files
+
+
+> indicates redirection of output
+< indicates redirection of input
+
+ls -lR---------listing subdirectories
+
+
+
+ls --help
+man ls
+info ls
+
+
+which command  gives the location of the command
+
+
+
+while /bin/true; do
+    something_in_the_background
+done & 
+
+
+
+
+
+
+
+
+
+how to display files and directories in reverse order			ls -r
+
+
+sort ls command output based on file extensions				ls -X
+
+list subdirectories recursively						ls -R	
+
+use ls to display file name and file sizes in the output		ls -s-h
+
+use ls to indicate the type of file in the output
+
+how to change the output format using ls		ls -format
+
+								
+
+use ls to hide a particular file			ls --hide=filename
+
+
+
+-l long format, displaying Unix file types, permissions, number of hard links, owner, group, size, last-modified date and filename
+-f do not sort. Useful for directories containing large numbers of files.
+-F appends a character revealing the nature of a file, for example, * for an executable, or / for a directory. Regular files have no suffix.
+-a lists all files in the given directory, including those whose names start with "." (which are hidden files in Unix). By default, these files are excluded from the list.
+-R recursively lists subdirectories. The command ls -R / would therefore list all files.
+-d shows information about a symbolic link or directory, rather than about the link's target or listing the contents of a directory.
+-t sort the list of files by modification time.
+-h print sizes in human readable format. (e.g., 1K, 234M, 2G, etc.) This option is not part of the POSIX standard, although implemented in several systems, e.g., GNU coreutils in 1997,[4] FreeBSD 4.5 in 2002,[5] and Solaris 9 in 2002.[6]
+
+
+to make copy command interactive use -i
+
+
+cp -r -i recursively and interactively if file already exists
+
+
+copy file to directory with same name
+			with different name
+
+
+owner--u
+group--g
+others--o
+all --a
+
+usergroup -- to create a group
+useradd -- to add a user
+
+esc :q!  to come out of vi editor
+
+read-list the files in directory
+write - create file  in directory , rename files in directory , delete files in the directory
+execute- enter into directory, access the files and subdirectories
+sticky bit - to restrict the permissions on files / directories for deletion  this is used
+		to allow only owner to delete the files as such
+
+rm -rf directoryname
+-r---recursively
+-f--forcefully
+-i-- interacvtively
+
+
+
+Training Started in Karapakkam-CHENNAI on LINUX and our work location is SIPCOT- CHENNAI. ID card assigned here is different from 
+ regular. After training we have to go SIPCOT.
+

@@ -1,0 +1,23 @@
+
+
+soft link and hard link 
+========================
+
+
+1) ln -s file1 file2
+
+2) ln file3 file4
+
+
+3) ls -lai 
+
+Lists all details of files , symbolic and hard links 
+
+4) ls -lL file1 --- gives a detailed info about the original file , hard link and symbolic link
+
+
+5) to find all soft links in the current directory 
+
+ls -la | grep ^l
+
+find . -type l
